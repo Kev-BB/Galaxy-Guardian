@@ -7,6 +7,7 @@ export default function App() {
   const STARTING_TIME = 60;
   const STARTING_SCORE = 0;
   const [timerRunning, setTimerRunning] = useState(false);
+  const [isGameFinished, setIsGameFinished] = useState(false)
   const [timeLeft, setTimeLeft] = useState(STARTING_TIME);
   const [score, setScore] = useState(STARTING_SCORE);
   const [playSong] = useSound("../audio/song.mp3");
@@ -19,8 +20,10 @@ export default function App() {
     playClick();
   }
 
+
+
   useEffect(() => {
-    if (timerRunning) {
+    if (timerRunning && timeLeft > 0) {
       const timerId = setInterval(() => {
         // Decrement the time by 1 second
         setTimeLeft(prevTime => prevTime - 1);
@@ -36,12 +39,19 @@ export default function App() {
     if (!timeLeft) {
       setTimerRunning(false);
       setTimeLeft(STARTING_TIME);
+      setScore(STARTING_SCORE)
+      setIsGameFinished(true)
     }
-  }, []);
+  }, [timeLeft, timerRunning]);
 
   return (
     <div>
       <ScoreBoard data={{ score, timeLeft }} />
+      {isGameFinished && (
+        <>
+        <h2>{`Your score ${score}`}</h2>
+        </>
+      )}
       <PlayArea playProps={{ timeLeft, timerRunning, setScore }} />
       <button
         className={`play-button ${timerRunning ? "fade-out" : "fade-in"}`}
