@@ -4,14 +4,26 @@ import getSpaceShips from '../utilities/getSpaceShips'
 import shootShip from '../utilities/shootShip'
 
 export default function PlayArea({ playProps }) {
-  const { timeLeft, timerRunning, setScore } = playProps
+  const { timeLeft, timerRunning, setScore, STARTING_SCORE, score  } = playProps
   const [currentShips, setCurrentShips] = useState([])
+  const [finalScore, setFinalScore] = useState(STARTING_SCORE);
+  const [isGameFinished, setIsGameFinished] = useState(false)
   const [playLaser] = useSound('../audio/laser.mp3', { volume: 0.15 })
   const [playExplosion] = useSound('../audio/explosion.mp3', { volume: 0.025 })
 
   useEffect(() => {
     if (timeLeft % 6 === 0 && timeLeft !== 0 && timerRunning) {
       setCurrentShips(getSpaceShips)
+    }
+  }, [timeLeft, timerRunning])  
+
+  useEffect(() => {
+    if(timerRunning){
+      setIsGameFinished(false)
+    }
+    if (!timeLeft) {
+      setFinalScore(score)
+      setIsGameFinished(true)
     }
   }, [timeLeft, timerRunning])
 
@@ -39,6 +51,11 @@ export default function PlayArea({ playProps }) {
 
   return (
     <div onMouseDown={playLaser} className='play-area-container'>
+         {isGameFinished && (
+        <>
+        <h2 className='final-score'>{`Your score: ${finalScore}`}</h2>
+        </>
+      )}
       {shipElements}
     </div>
   )

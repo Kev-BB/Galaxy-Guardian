@@ -7,9 +7,8 @@ export default function App() {
   const STARTING_TIME = 60;
   const STARTING_SCORE = 0;
   const [timerRunning, setTimerRunning] = useState(false);
-  const [isGameFinished, setIsGameFinished] = useState(false)
   const [timeLeft, setTimeLeft] = useState(STARTING_TIME);
-  const [score, setScore] = useState(STARTING_SCORE);
+  const [score, setScore] = useState(STARTING_SCORE)
   const [playSong] = useSound("../audio/song.mp3");
   const [playClick] = useSound("../audio/click.mp3", { volume: 0.45 });
 
@@ -40,25 +39,20 @@ export default function App() {
       setTimerRunning(false);
       setTimeLeft(STARTING_TIME);
       setScore(STARTING_SCORE)
-      setIsGameFinished(true)
     }
   }, [timeLeft, timerRunning]);
 
   return (
     <div>
       <ScoreBoard data={{ score, timeLeft }} />
-      {isGameFinished && (
-        <>
-        <h2>{`Your score ${score}`}</h2>
-        </>
-      )}
-      <PlayArea playProps={{ timeLeft, timerRunning, setScore }} />
+   
+      <PlayArea playProps={{ timeLeft, timerRunning, setScore, score, STARTING_SCORE   }} />
       <button
         className={`play-button ${timerRunning ? "fade-out" : "fade-in"}`}
         onClick={handleOnClick}
         disabled={timerRunning} // Disable the button when timer is running
       >
-        Başlat
+        Start
       </button>
     </div>
   );

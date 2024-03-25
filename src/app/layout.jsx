@@ -10,6 +10,7 @@ const press_start_2P = Press_Start_2P({
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
+      
       <body className={press_start_2P.variable}>{children}</body>
     </html>
   )

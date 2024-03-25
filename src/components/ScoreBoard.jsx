@@ -3,14 +3,14 @@ export default function ScoreBoard({ data }) {
     <div className='scoreboard'>
       <div className='timer'>
         <div className='display-value'>{data.timeLeft}</div>
-        <div>Zaman</div>
+        <div>Time</div>
       </div>
       <div className='title'>
-        Uzay <br /> Savaşçısı
+        Galaxy <br /> Guardian
       </div>
       <div className='score'>
         <div className='display-value'>{data.score}</div>
-        <div>Skor</div>
+        <div>Score</div>
       </div>
     </div>
   )

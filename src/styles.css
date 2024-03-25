@@ -61,6 +61,7 @@ body {
 
 /* ----- Play area ----- */
 .play-area-container {
+  position: relative;
   border-radius: 15px;
   background-image: url("../public/images/space-background.png");
   background-size: cover;
@@ -84,6 +85,15 @@ body {
 
 .play-area-container:active {
   cursor: url("../public/images/target3.png") 64 64, crosshair !important;
+}
+
+.final-score {
+  color: #fff0f0;
+  position: absolute;
+  top: 45%;
+  left: 80px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 /* ----- Ships ----- */
@@ -148,8 +158,6 @@ body {
 }
 
 /* ----- Start button ----- */
-
-
 
 .play-button {
   display: block;
